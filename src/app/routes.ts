@@ -1,0 +1,31 @@
+import { createBrowserRouter } from "react-router";
+import { Home } from "./pages/Home";
+import { About } from "./pages/About";
+import { Team } from "./pages/Team";
+import { Facilities } from "./pages/Facilities";
+import { Courses } from "./pages/Courses";
+import { Research } from "./pages/Research";
+import { ResearchDetail } from "./pages/ResearchDetail";
+import { Workshops } from "./pages/Workshops";
+import { Events } from "./pages/Events";
+import { Contact } from "./pages/Contact";
+import { RootLayout } from "./components/RootLayout";
+
+export const router = createBrowserRouter([
+  {
+    path: "/",
+    Component: RootLayout,
+    children: [
+      { index: true, Component: Home },
+      { path: "about", Component: About },
+      { path: "team", Component: Team },
+      { path: "facilities", Component: Facilities },
+      { path: "courses", Component: Courses },
+      { path: "research", Component: Research },
+      { path: "research/:id", Component: ResearchDetail },
+      { path: "workshops", Component: Workshops },
+      { path: "events", Component: Events },
+      { path: "contact", Component: Contact },
+    ],
+  },
+]);
