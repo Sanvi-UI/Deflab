@@ -6,7 +6,6 @@ import { Facilities } from "./pages/Facilities";
 import { Courses } from "./pages/Courses";
 import { Research } from "./pages/Research";
 import { ResearchDetail } from "./pages/ResearchDetail";
-import { Workshops } from "./pages/Workshops";
 import { Events } from "./pages/Events";
 import { Contact } from "./pages/Contact";
 import { RootLayout } from "./components/RootLayout";
@@ -23,7 +22,6 @@ export const router = createBrowserRouter([
       { path: "courses", Component: Courses },
       { path: "research", Component: Research },
       { path: "research/:id", Component: ResearchDetail },
-      { path: "workshops", Component: Workshops },
       { path: "events", Component: Events },
       { path: "contact", Component: Contact },
     ],

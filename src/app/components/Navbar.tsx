@@ -9,7 +9,6 @@ const navItems = [
   { label: "Facilities", path: "/facilities" },
   { label: "Courses", path: "/courses" },
   { label: "Research", path: "/research" },
-  { label: "Workshops", path: "/workshops" },
   { label: "Events", path: "/events" },
   { label: "Contact", path: "/contact" },
 ];

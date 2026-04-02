@@ -125,7 +125,7 @@ export function Events() {
           {events.map((event, index) => (
             <div
               key={index}
-              className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-all group"
+              className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md"
             >
               <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
                 {/* Image */}
@@ -133,7 +133,7 @@ export function Events() {
                   <img
                     src={event.image}
                     alt={event.title}
-                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                    className="w-full h-full object-cover"
                   />
                 </div>
 
@@ -150,7 +150,7 @@ export function Events() {
                   </div>
 
                   {/* Title */}
-                  <h3 className="text-2xl text-[#003153] mb-3 group-hover:text-[#FF6600] transition-colors">
+                  <h3 className="text-2xl text-[#003153] mb-3">
                     {event.title}
                   </h3>
 

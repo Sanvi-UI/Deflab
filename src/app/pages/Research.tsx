@@ -1,8 +1,11 @@
 import { Tag } from "lucide-react";
 import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
+import { useState } from "react";
 
 export function Research() {
+  const [selectedCategory, setSelectedCategory] = useState("All");
+
   const projects = [
     {
       id: "digital-visualisation-automotive-vr",
@@ -80,6 +83,11 @@ export function Research() {
 
   const categories = ["All", "VR", "Mobility", "Interaction Design"];
 
+  // Filter projects based on selected category
+  const filteredProjects = selectedCategory === "All" 
+    ? projects 
+    : projects.filter(project => project.category === selectedCategory);
+
   return (
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
@@ -94,11 +102,12 @@ export function Research() {
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
-          {categories.map((cat, index) => (
+          {categories.map((cat) => (
             <button
-              key={index}
+              key={cat}
+              onClick={() => setSelectedCategory(cat)}
               className={`px-5 py-2 rounded-full text-sm transition-all ${
-                index === 0
+                selectedCategory === cat
                   ? "bg-[#FF6600] text-white shadow-md"
                   : "bg-gray-100 text-[#666666] hover:bg-gray-200"
               }`}
@@ -110,10 +119,10 @@ export function Research() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {projects.map((project, index) => (
+          {filteredProjects.map((project) => (
             <div
-              key={index}
-              className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-all group flex flex-col h-[560px]"
+              key={project.id}
+              className="bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all group flex flex-col h-[560px] overflow-hidden relative"
             >
               {/* Image */}
               <div className="h-[220px] overflow-hidden bg-gray-100 flex-shrink-0">
@@ -151,7 +160,7 @@ export function Research() {
                 <div className="mt-4">
                   <Link
                     to={`/research/${project.id}`}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#003153] text-white text-sm rounded-lg hover:bg-[#003153]/90 transition-colors"
+                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#003153] text-white text-sm rounded-lg hover:bg-[#FF6600] transition-colors"
                   >
                     View More Details
                     <ArrowUpRight size={16} />
@@ -159,8 +168,8 @@ export function Research() {
                 </div>
               </div>
 
-              {/* Hover Effect Border */}
-              <div className="h-1 bg-[#FF6600] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left flex-shrink-0"></div>
+              {/* Hover Effect Border - Orange line at bottom */}
+              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF6600] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
             </div>
           ))}
         </div>
