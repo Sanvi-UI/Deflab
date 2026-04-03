@@ -1,4 +1,69 @@
 import { BookOpen, Users, Clock } from "lucide-react";
+import { PageHeader } from "../components/PageHeader";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
+
+function CourseCard({ course, index }: { course: any; index: number }) {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        animation: isVisible ? `cardPopUp 0.6s ease-out ${index * 0.15}s both` : 'none',
+        opacity: isVisible ? 1 : 0,
+      }}
+      className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-all group flex flex-col"
+    >
+      {/* Image */}
+      <div className="h-56 overflow-hidden bg-gray-100">
+        <img
+          src={course.image}
+          alt={course.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="p-6 flex-grow flex flex-col">
+        <h3 className="text-2xl text-[#003153] mb-4 group-hover:text-[#FF6600] transition-colors">{course.title}</h3>
+        
+        {/* Info Icons */}
+        <div className="flex flex-wrap gap-4 mb-4">
+          <div className="flex items-center gap-2 text-sm text-[#666666]">
+            <Users size={16} className="text-[#FF6600]" />
+            <span>{course.students}</span>
+          </div>
+          <div className="flex items-center gap-2 text-sm text-[#666666]">
+            <Clock size={16} className="text-[#FF6600]" />
+            <span>{course.duration}</span>
+          </div>
+        </div>
+
+        <p className="text-[#666666] mb-4 leading-relaxed">{course.description}</p>
+
+        {/* Instructor */}
+        <p className="text-sm text-[#666666] mb-4">
+          <span className="text-[#003153]">Instructor:</span> {course.instructor}
+        </p>
+
+        {/* Topics */}
+        <div className="mt-auto">
+          <p className="text-xs text-[#666666] mb-2">Topics Covered:</p>
+          <div className="flex flex-wrap gap-2">
+            {course.topics.map((topic: string, topicIndex: number) => (
+              <span
+                key={topicIndex}
+                className="text-xs px-3 py-1 bg-[#FF6600]/10 text-[#FF6600] rounded-full"
+              >
+                {topic}
+              </span>
+            ))}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Courses() {
   const courses = [
@@ -35,74 +100,15 @@ export function Courses() {
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-5xl text-[#003153] mb-4">Courses & Learning</h1>
-          <div className="w-24 h-1 bg-[#FF6600] mx-auto mb-6"></div>
-          <p className="text-lg text-[#666666] max-w-3xl mx-auto">
-            DEF Lab offers specialized courses in future design, virtual reality, and immersive technologies, combining theoretical foundations with hands-on practice.
-          </p>
-        </div>
+        <PageHeader
+          title="Courses & Learning"
+          description="DEF Lab offers specialized courses in future design, virtual reality, and immersive technologies, combining theoretical foundations with hands-on practice."
+        />
 
         {/* Courses Grid */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-20">
           {courses.map((course, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-all group flex flex-col"
-            >
-              {/* Image */}
-              <div className="aspect-video overflow-hidden bg-gray-100">
-                <img
-                  src={course.image}
-                  alt={course.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="p-6 flex-1 flex flex-col">
-                <h3 className="text-2xl text-[#003153] mb-3">{course.title}</h3>
-
-                {/* Course Meta */}
-                <div className="space-y-2 mb-4 text-sm text-[#666666]">
-                  <div className="flex items-center gap-2">
-                    <BookOpen size={16} className="text-[#FF6600]" />
-                    <span>Instructor: {course.instructor}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Clock size={16} className="text-[#FF6600]" />
-                    <span>{course.duration}</span>
-                  </div>
-                  <div className="flex items-center gap-2">
-                    <Users size={16} className="text-[#FF6600]" />
-                    <span>{course.students}</span>
-                  </div>
-                </div>
-
-                {/* Description */}
-                <p className="text-[#666666] leading-relaxed mb-4">{course.description}</p>
-
-                {/* Topics */}
-                <div className="mt-auto">
-                  <p className="text-sm text-[#003153] mb-2">Topics Covered:</p>
-                  <div className="flex flex-wrap gap-2">
-                    {course.topics.map((topic, topicIndex) => (
-                      <span
-                        key={topicIndex}
-                        className="text-xs bg-[#7DF9FF]/20 text-[#003153] px-3 py-1 rounded-full"
-                      >
-                        {topic}
-                      </span>
-                    ))}
-                  </div>
-                </div>
-
-                {/* Button */}
-                <button className="mt-6 w-full py-3 bg-[#FF6600] text-white rounded-lg hover:bg-[#FF6600]/90 transition-colors">
-                  Learn More
-                </button>
-              </div>
-            </div>
+            <CourseCard key={index} course={course} index={index} />
           ))}
         </div>
 

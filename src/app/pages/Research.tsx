@@ -2,6 +2,70 @@ import { Tag } from "lucide-react";
 import { Link } from "react-router";
 import { ArrowUpRight } from "lucide-react";
 import { useState } from "react";
+import { PageHeader } from "../components/PageHeader";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
+
+function ResearchCard({ project, index }: { project: any; index: number }) {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        animation: isVisible ? `cardPopUp 0.6s ease-out ${index * 0.1}s both` : 'none',
+        opacity: isVisible ? 1 : 0,
+      }}
+      className="bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all group flex flex-col h-[560px] overflow-hidden relative"
+    >
+      {/* Image */}
+      <div className="h-[220px] overflow-hidden bg-gray-100 flex-shrink-0">
+        <img
+          src={project.image}
+          alt={project.title}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="p-6 flex flex-col flex-grow">
+        {/* Category Tag */}
+        <div className="flex items-center gap-2 mb-3">
+          <Tag size={14} className="text-[#FF6600]" />
+          <span className="text-xs tracking-wider text-[#FF6600] bg-[#FF6600]/10 px-3 py-1 rounded-full">
+            {project.category}
+          </span>
+        </div>
+
+        {/* Title */}
+        <h3 className="text-2xl text-[#003153] mb-3 group-hover:text-[#FF6600] transition-colors min-h-[64px] leading-tight">
+          {project.title}
+        </h3>
+
+        {/* Researcher Name */}
+        <p className="text-sm text-[#666666] mb-3">
+          Researcher: {project.researcher}
+        </p>
+
+        {/* Description */}
+        <p className="text-sm text-[#666666] leading-relaxed flex-grow line-clamp-4">{project.description}</p>
+
+        {/* View More Detail Button */}
+        <div className="mt-4">
+          <Link
+            to={`/research/${project.id}`}
+            className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#003153] text-white text-sm rounded-lg hover:bg-[#FF6600] transition-colors"
+          >
+            View Details
+            <ArrowUpRight size={16} />
+          </Link>
+        </div>
+      </div>
+
+      {/* Gradient Line on Hover - Positioned at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF6600] transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
+    </div>
+  );
+}
 
 export function Research() {
   const [selectedCategory, setSelectedCategory] = useState("All");
@@ -82,23 +146,19 @@ export function Research() {
   ];
 
   const categories = ["All", "VR", "Mobility", "Interaction Design"];
-
-  // Filter projects based on selected category
+  
   const filteredProjects = selectedCategory === "All" 
     ? projects 
-    : projects.filter(project => project.category === selectedCategory);
+    : projects.filter(p => p.category === selectedCategory);
 
   return (
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-5xl text-[#003153] mb-4">Research & Experiments</h1>
-          <div className="w-24 h-1 bg-[#FF6600] mx-auto mb-6"></div>
-          <p className="text-lg text-[#666666] max-w-3xl mx-auto">
-            Innovative research projects pushing the boundaries of design, technology, and human experience.
-          </p>
-        </div>
+        <PageHeader
+          title="Research Projects"
+          description="Explore our cutting-edge research initiatives spanning VR, mobility design, and interactive technologies that push the boundaries of design innovation."
+        />
 
         {/* Category Filter */}
         <div className="flex flex-wrap justify-center gap-3 mb-12">
@@ -119,58 +179,8 @@ export function Research() {
 
         {/* Projects Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {filteredProjects.map((project) => (
-            <div
-              key={project.id}
-              className="bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all group flex flex-col h-[560px] overflow-hidden relative"
-            >
-              {/* Image */}
-              <div className="h-[220px] overflow-hidden bg-gray-100 flex-shrink-0">
-                <img
-                  src={project.image}
-                  alt={project.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="p-6 flex flex-col flex-grow">
-                {/* Category Tag */}
-                <div className="flex items-center gap-2 mb-3">
-                  <Tag size={14} className="text-[#FF6600]" />
-                  <span className="text-xs tracking-wider text-[#FF6600] bg-[#FF6600]/10 px-3 py-1 rounded-full">
-                    {project.category}
-                  </span>
-                </div>
-
-                {/* Title */}
-                <h3 className="text-2xl text-[#003153] mb-3 group-hover:text-[#FF6600] transition-colors min-h-[64px] leading-tight">
-                  {project.title}
-                </h3>
-
-                {/* Researcher Name */}
-                <p className="text-sm text-[#666666] mb-3">
-                  Researcher: {project.researcher}
-                </p>
-
-                {/* Description */}
-                <p className="text-sm text-[#666666] leading-relaxed flex-grow line-clamp-4">{project.description}</p>
-
-                {/* View More Detail Button */}
-                <div className="mt-4">
-                  <Link
-                    to={`/research/${project.id}`}
-                    className="inline-flex items-center gap-2 px-5 py-2.5 bg-[#003153] text-white text-sm rounded-lg hover:bg-[#FF6600] transition-colors"
-                  >
-                    View More Details
-                    <ArrowUpRight size={16} />
-                  </Link>
-                </div>
-              </div>
-
-              {/* Hover Effect Border - Orange line at bottom */}
-              <div className="absolute bottom-0 left-0 right-0 h-1 bg-[#FF6600] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
-            </div>
+          {filteredProjects.map((project, index) => (
+            <ResearchCard project={project} index={index} key={project.id} />
           ))}
         </div>
 

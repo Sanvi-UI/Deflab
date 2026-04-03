@@ -1,5 +1,53 @@
 import { Glasses, Printer, Scan, Eye, Hand, Car, Plane, Monitor, Code, Pen } from "lucide-react";
 import { useState } from "react";
+import { PageHeader } from "../components/PageHeader";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
+
+function FacilityCard({ product, index, icon }: { product: any; index: number; icon: any }) {
+  const { ref, isVisible } = useScrollAnimation();
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        animation: isVisible ? `cardPopUp 0.6s ease-out ${index * 0.1}s both` : 'none',
+        opacity: isVisible ? 1 : 0,
+      }}
+      className="bg-white rounded-xl border border-gray-200 shadow-md hover:shadow-xl transition-all group overflow-hidden relative flex flex-col"
+    >
+      {/* Image */}
+      <div className="aspect-video overflow-hidden bg-gray-100">
+        <img
+          src={product.image}
+          alt={product.name}
+          className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+        />
+      </div>
+
+      {/* Content */}
+      <div className="p-6 flex-grow">
+        <div className="mb-4 transition-transform group-hover:scale-110 origin-left">
+          {icon}
+        </div>
+        <h3 className="text-xl text-[#003153] mb-3">{product.name}</h3>
+        <p className="text-[#666666] leading-relaxed mb-4">{product.description}</p>
+        
+        {/* Specifications */}
+        <ul className="space-y-1">
+          {product.specs.map((spec: string, specIndex: number) => (
+            <li key={specIndex} className="flex items-start gap-2 text-sm text-[#666666]">
+              <span className="w-1.5 h-1.5 rounded-full bg-[#FF6600] mt-1.5"></span>
+              <span>{spec}</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+
+      {/* Accent Border - Positioned absolutely at bottom */}
+      <div className="absolute bottom-0 left-0 right-0 h-1 bg-gradient-to-r from-[#FF6600] via-[#7DF9FF] to-[#003153] opacity-0 group-hover:opacity-100 transition-opacity duration-300"></div>
+    </div>
+  );
+}
 
 export function Facilities() {
   const [activeCategory, setActiveCategory] = useState(0);
@@ -136,16 +184,13 @@ export function Facilities() {
   const currentCategory = facilities[activeCategory];
 
   return (
-    <div className="py-12 bg-white">
+    <div className="py-12 bg-white min-h-screen">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-5xl text-[#003153] mb-4">Our Facilities</h1>
-          <div className="w-24 h-1 bg-[#FF6600] mx-auto mb-6"></div>
-          <p className="text-lg text-[#666666] max-w-3xl mx-auto">
-            DEF Lab is equipped with cutting-edge technology and tools to support innovative research and experimentation in immersive design and future mobility.
-          </p>
-        </div>
+        <PageHeader
+          title="Our Facilities"
+          description="DEF Lab is equipped with cutting-edge technology and tools to support research, prototyping, and innovation in design and immersive experiences."
+        />
 
         {/* Category Tabs */}
         <div className="mb-12 overflow-x-auto">
@@ -169,41 +214,12 @@ export function Facilities() {
         {/* Product Cards Grid */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {currentCategory.products.map((product, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md hover:shadow-xl transition-all group"
-            >
-              {/* Image */}
-              <div className="aspect-video overflow-hidden bg-gray-100">
-                <img
-                  src={product.image}
-                  alt={product.name}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-              </div>
-
-              {/* Content */}
-              <div className="p-6">
-                <div className="mb-4 transition-transform group-hover:scale-110 origin-left">
-                  {currentCategory.icon}
-                </div>
-                <h3 className="text-xl text-[#003153] mb-3">{product.name}</h3>
-                <p className="text-[#666666] leading-relaxed mb-4">{product.description}</p>
-                
-                {/* Specifications */}
-                <ul className="space-y-1">
-                  {product.specs.map((spec, specIndex) => (
-                    <li key={specIndex} className="flex items-start gap-2 text-sm text-[#666666]">
-                      <span className="w-1.5 h-1.5 rounded-full bg-[#FF6600] mt-1.5"></span>
-                      <span>{spec}</span>
-                    </li>
-                  ))}
-                </ul>
-              </div>
-
-              {/* Accent Border */}
-              <div className="h-1 bg-gradient-to-r from-[#FF6600] via-[#7DF9FF] to-[#003153] transform scale-x-0 group-hover:scale-x-100 transition-transform origin-left"></div>
-            </div>
+            <FacilityCard 
+              key={`${activeCategory}-${index}`} 
+              product={product} 
+              index={index} 
+              icon={currentCategory.icon} 
+            />
           ))}
         </div>
 

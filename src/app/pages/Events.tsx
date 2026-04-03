@@ -1,6 +1,88 @@
 import { Calendar, MapPin, Users } from "lucide-react";
+import { useState } from "react";
+import { PageHeader } from "../components/PageHeader";
+import { useScrollAnimation } from "../hooks/useScrollAnimation";
+
+function EventCard({ event, index }: { event: any; index: number }) {
+  const { ref, isVisible } = useScrollAnimation();
+
+  const gradientColors = [
+    "from-[#FF6600] via-[#FF8C42] to-[#FFB380]",
+    "from-[#7DF9FF] via-[#4FC3F7] to-[#0288D1]",
+    "from-[#003153] via-[#1A5B7A] to-[#4A90A4]",
+    "from-[#FF6600] via-[#7DF9FF] to-[#003153]",
+  ];
+
+  const gradientClass = gradientColors[index % gradientColors.length];
+
+  return (
+    <div
+      ref={ref}
+      style={{
+        animation: isVisible ? `cardPopUp 0.6s ease-out ${index * 0.1}s both` : 'none',
+        opacity: isVisible ? 1 : 0,
+      }}
+      className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md group hover:shadow-xl transition-all duration-300 relative"
+    >
+      {/* Status Badge & Gradient Line */}
+      <div className="absolute top-0 left-0 right-0 z-10 flex justify-between items-start p-6">
+        <span className={`px-4 py-1.5 rounded-full text-xs backdrop-blur-sm border ${
+          event.status === "Upcoming"
+            ? "bg-[#7DF9FF]/90 text-[#003153] border-[#7DF9FF]"
+            : "bg-white/90 text-[#666666] border-gray-300"
+        }`}>
+          {event.status}
+        </span>
+      </div>
+
+      {/* Top gradient line */}
+      <div className={`h-1 w-0 group-hover:w-full transition-all duration-500 bg-gradient-to-r ${gradientClass}`}></div>
+
+      <div className="flex flex-col md:flex-row">
+        {/* Image */}
+        <div className="md:w-2/5 h-64 md:h-auto overflow-hidden bg-gray-100">
+          <img
+            src={event.image}
+            alt={event.title}
+            className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+          />
+        </div>
+
+        {/* Content */}
+        <div className="md:w-3/5 p-6 md:p-8 flex flex-col justify-between">
+          <div>
+            <div className="flex items-center gap-2 mb-3">
+              <span className="text-xs px-3 py-1 bg-[#FF6600]/10 text-[#FF6600] rounded-full">
+                {event.type}
+              </span>
+            </div>
+
+            <h3 className="text-2xl text-[#003153] mb-4 group-hover:text-[#FF6600] transition-colors">
+              {event.title}
+            </h3>
+
+            <p className="text-[#666666] leading-relaxed mb-6">{event.description}</p>
+          </div>
+
+          <div className="space-y-2">
+            <div className="flex items-center gap-3 text-sm text-[#666666]">
+              <Calendar size={16} className="text-[#FF6600]" />
+              <span>{event.date}</span>
+            </div>
+            <div className="flex items-center gap-3 text-sm text-[#666666]">
+              <MapPin size={16} className="text-[#FF6600]" />
+              <span>{event.location}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+}
 
 export function Events() {
+  const [activeFilter, setActiveFilter] = useState<"all" | "upcoming" | "past">("all");
+
   const events = [
     {
       title: "India HCI 2025 Exhibition",
@@ -76,101 +158,61 @@ export function Events() {
     },
   ];
 
-  const getStatusColor = (status: string) => {
-    return status === "Upcoming" ? "bg-[#7DF9FF]/20 text-[#003153]" : "bg-gray-100 text-[#666666]";
-  };
-
-  const getTypeColor = (type: string) => {
-    switch (type) {
-      case "Conference":
-        return "text-[#FF6600] bg-[#FF6600]/10";
-      case "Exhibition":
-        return "text-[#7DF9FF] bg-[#7DF9FF]/10";
-      case "Industry Visit":
-        return "text-[#003153] bg-[#003153]/10";
-      case "Collaboration":
-        return "text-purple-600 bg-purple-100";
-      default:
-        return "text-[#666666] bg-gray-100";
-    }
-  };
+  // Filter events based on active tab
+  const filteredEvents = events.filter((event) => {
+    if (activeFilter === "all") return true;
+    if (activeFilter === "upcoming") return event.status === "Upcoming";
+    if (activeFilter === "past") return event.status === "Completed";
+    return true;
+  });
 
   return (
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-5xl text-[#003153] mb-4">Events & Collaborations</h1>
-          <div className="w-24 h-1 bg-[#FF6600] mx-auto mb-6"></div>
-          <p className="text-lg text-[#666666] max-w-3xl mx-auto">
-            DEF Lab actively participates in conferences, exhibitions, and industry collaborations to share research and foster innovation.
-          </p>
-        </div>
+        <PageHeader
+          title="Events & Collaborations"
+          description="DEF Lab actively participates in conferences, exhibitions, and industry collaborations to share research and foster innovation."
+        />
 
         {/* Filter Tabs */}
         <div className="flex justify-center gap-4 mb-12">
-          <button className="px-6 py-2 bg-[#FF6600] text-white rounded-full text-sm">
+          <button
+            onClick={() => setActiveFilter("all")}
+            className={`px-6 py-2 rounded-full text-sm transition-all ${
+              activeFilter === "all"
+                ? "bg-[#FF6600] text-white"
+                : "bg-gray-100 text-[#666666] hover:bg-gray-200"
+            }`}
+          >
             All Events
           </button>
-          <button className="px-6 py-2 bg-gray-100 text-[#666666] hover:bg-gray-200 rounded-full text-sm transition-colors">
+          <button
+            onClick={() => setActiveFilter("upcoming")}
+            className={`px-6 py-2 rounded-full text-sm transition-all ${
+              activeFilter === "upcoming"
+                ? "bg-[#FF6600] text-white"
+                : "bg-gray-100 text-[#666666] hover:bg-gray-200"
+            }`}
+          >
             Upcoming
           </button>
-          <button className="px-6 py-2 bg-gray-100 text-[#666666] hover:bg-gray-200 rounded-full text-sm transition-colors">
+          <button
+            onClick={() => setActiveFilter("past")}
+            className={`px-6 py-2 rounded-full text-sm transition-all ${
+              activeFilter === "past"
+                ? "bg-[#FF6600] text-white"
+                : "bg-gray-100 text-[#666666] hover:bg-gray-200"
+            }`}
+          >
             Past Events
           </button>
         </div>
 
         {/* Events Timeline */}
         <div className="space-y-8">
-          {events.map((event, index) => (
-            <div
-              key={index}
-              className="bg-white rounded-xl overflow-hidden border border-gray-200 shadow-md"
-            >
-              <div className="grid grid-cols-1 lg:grid-cols-3 gap-0">
-                {/* Image */}
-                <div className="h-60 lg:h-60 overflow-hidden bg-gray-100">
-                  <img
-                    src={event.image}
-                    alt={event.title}
-                    className="w-full h-full object-cover"
-                  />
-                </div>
-
-                {/* Content */}
-                <div className="lg:col-span-2 p-6 lg:p-8 flex flex-col h-60">
-                  {/* Badges */}
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    <span className={`text-xs px-3 py-1 rounded-full ${getTypeColor(event.type)}`}>
-                      {event.type}
-                    </span>
-                    <span className={`text-xs px-3 py-1 rounded-full ${getStatusColor(event.status)}`}>
-                      {event.status}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h3 className="text-2xl text-[#003153] mb-3">
-                    {event.title}
-                  </h3>
-
-                  {/* Description */}
-                  <p className="text-[#666666] leading-relaxed mb-4 flex-grow">{event.description}</p>
-
-                  {/* Meta */}
-                  <div className="flex flex-wrap gap-4 text-sm text-[#666666]">
-                    <div className="flex items-center gap-2">
-                      <Calendar size={16} className="text-[#FF6600]" />
-                      <span>{event.date}</span>
-                    </div>
-                    <div className="flex items-center gap-2">
-                      <MapPin size={16} className="text-[#FF6600]" />
-                      <span>{event.location}</span>
-                    </div>
-                  </div>
-                </div>
-              </div>
-            </div>
+          {filteredEvents.map((event, index) => (
+            <EventCard key={index} event={event} index={index} />
           ))}
         </div>
 

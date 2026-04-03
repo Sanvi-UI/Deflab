@@ -1,4 +1,5 @@
 import { Glasses, Printer, ScanLine, Code, Gamepad2, Palette } from "lucide-react";
+import { PageHeader } from "../components/PageHeader";
 
 export function About() {
   const services = [
@@ -38,10 +39,10 @@ export function About() {
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-5xl text-[#003153] mb-4">About DEF Lab</h1>
-          <div className="w-24 h-1 bg-[#FF6600] mx-auto"></div>
-        </div>
+        <PageHeader
+          title="About DEF Lab"
+          description="Design for Future (DeF) lab is envisioned to create visions for new design solutions that contribute to the social, environmental, and economic future of the world."
+        />
 
         {/* Intro Text with Image */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-12">

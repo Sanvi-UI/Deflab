@@ -1,4 +1,5 @@
 import { User } from "lucide-react";
+import { PageHeader } from "../components/PageHeader";
 
 export function Team() {
   const teamCategories = [
@@ -110,16 +111,13 @@ export function Team() {
   ];
 
   return (
-    <div className="py-12">
+    <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-5xl text-[#003153] mb-4">Meet Our Team</h1>
-          <div className="w-24 h-1 bg-[#FF6600] mx-auto mb-6"></div>
-          <p className="text-lg text-[#666666] max-w-3xl mx-auto">
-            A diverse group of researchers, designers, and innovators working together to shape the future of design and technology.
-          </p>
-        </div>
+        <PageHeader
+          title="Our Team"
+          description="Meet the talented individuals driving innovation and research at DEF Lab. Our multidisciplinary team brings together expertise in design, technology, and creative thinking."
+        />
 
         {/* Team Categories */}
         <div className="space-y-16">

@@ -1,6 +1,7 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
 import idcBuildingImage from "figma:asset/ca5ab052a9b14c33bdf56930935023eb87e35e5d.png";
+import { PageHeader } from "../components/PageHeader";
 
 export function Contact() {
   const [formData, setFormData] = useState({
@@ -29,13 +30,10 @@ export function Contact() {
     <div className="py-12 bg-white">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
         {/* Header */}
-        <div className="text-center mb-10">
-          <h1 className="text-5xl text-[#003153] mb-4">Contact Us</h1>
-          <div className="w-24 h-1 bg-[#FF6600] mx-auto mb-6"></div>
-          <p className="text-lg text-[#666666] max-w-3xl mx-auto">
-            Get in touch with us for research collaborations, lab visits, course inquiries, or any questions about DEF Lab.
-          </p>
-        </div>
+        <PageHeader
+          title="Contact Us"
+          description="Get in touch with us for research collaborations, lab visits, course inquiries, or any questions about DEF Lab."
+        />
 
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12">
           {/* Contact Information */}

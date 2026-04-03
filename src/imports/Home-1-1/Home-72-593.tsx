@@ -1,12 +1,12 @@
 import svgPaths from "./svg-h0r6zst485";
-import imgImg from "./c0cf51be02437d2d153e1452f178343609c7551a.png";
-import imgImg1 from "./3cf29ff2bf79b70ecaf1205b7e445869cc8c060f.png";
-import imgImg2 from "./ea979a9551df9cb2bb177dcc92db78341f3a976a.png";
-import imgImg3 from "./fdb13c781ed1944f57d842f6d8041ac203fdf641.png";
-import imgImg4 from "./fc7056968172f51068ce32a5047d643b0ee60e77.png";
-import imgImg5 from "./e542a5ff15b56ea80c573c4c73ce9902d04c882b.png";
-import imgImg6 from "./dbdfeab53ecfc49bb38ea2b08d65e67613650165.png";
-import imgImg7 from "./1beaac6010fb1a0baf239fe8525c592b2cde9a33.png";
+import imgImg from "figma:asset/c0cf51be02437d2d153e1452f178343609c7551a.png";
+import imgImg1 from "figma:asset/3cf29ff2bf79b70ecaf1205b7e445869cc8c060f.png";
+import imgImg2 from "figma:asset/ea979a9551df9cb2bb177dcc92db78341f3a976a.png";
+import imgImg3 from "figma:asset/fdb13c781ed1944f57d842f6d8041ac203fdf641.png";
+import imgImg4 from "figma:asset/fc7056968172f51068ce32a5047d643b0ee60e77.png";
+import imgImg5 from "figma:asset/e542a5ff15b56ea80c573c4c73ce9902d04c882b.png";
+import imgImg6 from "figma:asset/dbdfeab53ecfc49bb38ea2b08d65e67613650165.png";
+import imgImg7 from "figma:asset/1beaac6010fb1a0baf239fe8525c592b2cde9a33.png";
 
 function Container() {
   return (
@@ -920,7 +920,7 @@ function H9() {
 function P16() {
   return (
     <div className="absolute h-[72px] left-[24px] top-[132px] w-[274.328px]" data-name="p">
-      <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[24px] left-0 not-italic text-[#666] text-[16px] top-[-0.5px] tracking-[-0.3125px] w-[241px]">State-of-the-art VR systems now operational for immersive design research</p>
+      <p className="absolute font-['Inter:Regular',sans-serif] font-normal leading-[24px] left-0 not-italic text-[#666] text-[16px] top-[8px] tracking-[-0.3125px] w-[241px]">State-of-the-art VR systems now operational for immersive design research</p>
     </div>
   );
 }
