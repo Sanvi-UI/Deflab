@@ -4,7 +4,7 @@ import defLabLogo from "figma:asset/1beaac6010fb1a0baf239fe8525c592b2cde9a33.png
 
 export function Footer() {
   return (
-    <footer className="bg-[#003153] text-white">
+    <footer className="bg-[#003153] text-white rounded-t-[20px]">
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
         <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-8">
           {/* Logo and Description */}

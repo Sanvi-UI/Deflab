@@ -7,6 +7,7 @@ import { Courses } from "./pages/Courses";
 import { Research } from "./pages/Research";
 import { ResearchDetail } from "./pages/ResearchDetail";
 import { Events } from "./pages/Events";
+import { EventsFigma } from "./pages/EventsFigma";
 import { Contact } from "./pages/Contact";
 import { RootLayout } from "./components/RootLayout";
 
@@ -22,7 +23,7 @@ export const router = createBrowserRouter([
       { path: "courses", Component: Courses },
       { path: "research", Component: Research },
       { path: "research/:id", Component: ResearchDetail },
-      { path: "events", Component: Events },
+      { path: "events", Component: EventsFigma },
       { path: "contact", Component: Contact },
     ],
   },
