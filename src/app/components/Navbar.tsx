@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router";
 import { Menu, X } from "lucide-react";
 import { useState } from "react";
-import defLabLogo from "figma:asset/1beaac6010fb1a0baf239fe8525c592b2cde9a33.png";
+import defLabLogo from "../../imports/Home-1-1/1beaac6010fb1a0baf239fe8525c592b2cde9a33.png";
 
 const navItems = [
   { label: "About", path: "/about" },

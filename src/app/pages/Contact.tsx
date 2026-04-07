@@ -1,6 +1,6 @@
 import { Mail, Phone, MapPin, Send } from "lucide-react";
 import { useState } from "react";
-import idcBuildingImage from "figma:asset/ca5ab052a9b14c33bdf56930935023eb87e35e5d.png";
+
 import { PageHeader } from "../components/PageHeader";
 
 export function Contact() {
@@ -209,11 +209,16 @@ export function Contact() {
 
         {/* Map Placeholder */}
         <div className="mt-16">
-          <div className="aspect-video rounded-2xl overflow-hidden border border-gray-200 shadow-lg bg-gray-100">
-            <img
-              src={idcBuildingImage}
-              alt="IDC Building - IIT Bombay"
-              className="w-full h-full object-cover"
+          <div className="aspect-video rounded-2xl overflow-hidden border border-gray-200 shadow-lg">
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3769.5038539285!2d72.9130!3d19.1332!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x3be7c85f71a3e9ad%3A0x6982f68aff82c5a3!2sIDC%20School%20of%20Design%2C%20IIT%20Bombay!5e0!3m2!1sen!2sin!4v1700000000000!5m2!1sen!2sin"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="DEF Lab Location - IIT Bombay"
             />
           </div>
           <p className="text-center text-sm text-[#666666] mt-4">
