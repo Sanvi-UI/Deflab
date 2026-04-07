@@ -1,4 +1,4 @@
-# Simple workflow for deploying static content to GitHub Pages
+# Workflow for deploying Vite React app to GitHub Pages
 name: Deploy React app to Pages
 
 on:
@@ -24,22 +24,26 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v4
+
       - name: Set up Node
         uses: actions/setup-node@v4
         with:
-          node-version: 20
+          node-version: 24
+
       - name: Install dependencies
         run: npm install --legacy-peer-deps
-      - name: Install React (peer deps)
-        run: npm install react@18.3.1 react-dom@18.3.1 --legacy-peer-deps
+
       - name: Build
         run: npm run build
+
       - name: Setup Pages
         uses: actions/configure-pages@v4
+
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
           path: './dist'
+
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v4

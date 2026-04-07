@@ -11,20 +11,25 @@ import { EventsFigma } from "./pages/EventsFigma";
 import { Contact } from "./pages/Contact";
 import { RootLayout } from "./components/RootLayout";
 
-export const router = createBrowserRouter([
+export const router = createBrowserRouter(
+  [
+    {
+      path: "/",
+      Component: RootLayout,
+      children: [
+        { index: true, Component: Home },
+        { path: "about", Component: About },
+        { path: "team", Component: Team },
+        { path: "facilities", Component: Facilities },
+        { path: "courses", Component: Courses },
+        { path: "research", Component: Research },
+        { path: "research/:id", Component: ResearchDetail },
+        { path: "events", Component: EventsFigma },
+        { path: "contact", Component: Contact },
+      ],
+    },
+  ],
   {
-    path: "/",
-    Component: RootLayout,
-    children: [
-      { index: true, Component: Home },
-      { path: "about", Component: About },
-      { path: "team", Component: Team },
-      { path: "facilities", Component: Facilities },
-      { path: "courses", Component: Courses },
-      { path: "research", Component: Research },
-      { path: "research/:id", Component: ResearchDetail },
-      { path: "events", Component: EventsFigma },
-      { path: "contact", Component: Contact },
-    ],
-  },
-]);
+    basename: "/Deflab",
+  }
+);
