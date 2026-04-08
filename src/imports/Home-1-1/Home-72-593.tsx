@@ -1479,7 +1479,7 @@ function Footer() {
 
 function Div() {
   return (
-    <div className="absolute bg-white content-stretch flex flex-col h-[836px] items-start left-0 pt-px top-0 w-[1101px]" data-name="div">
+    <div className="absolute bg-white content-stretch flex flex-col h-[3795px] items-start left-0 pt-px top-0 w-[1101px]" data-name="div">
       <MainContent />
       <Footer />
     </div>
@@ -1488,7 +1488,7 @@ function Div() {
 
 export default function Home() {
   return (
-    <div className="bg-white relative size-full" data-name="HOME">
+    <div className="bg-white relative w-full h-[3795px]" data-name="HOME">
       <Div />
     </div>
   );
