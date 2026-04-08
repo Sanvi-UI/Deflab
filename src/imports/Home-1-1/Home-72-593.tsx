@@ -78,7 +78,7 @@ function Div1() {
 
 function Section() {
   return (
-    <div className="absolute bg-white content-stretch flex flex-col h-[402px] items-start left-0 pb-px pt-[64px] px-[38.5px] top-[688px] w-[1101px]" data-name="section">
+    <div className="absolute bg-white content-stretch flex flex-col h-[402px] items-start left-0 pb-px pt-[64px] px-[38.5px] top-[688px] w-full" data-name="section">
       <div aria-hidden="true" className="absolute border-[#e5e7eb] border-b border-solid inset-0 pointer-events-none" />
       <Div1 />
     </div>
@@ -408,7 +408,7 @@ function Container12() {
 
 function Section1() {
   return (
-    <div className="absolute bg-[#f9fafb] content-stretch flex flex-col gap-[48px] h-[445px] items-start left-0 px-[32px] top-[1090px] w-[1101px]" data-name="Section">
+    <div className="absolute bg-[#f9fafb] content-stretch flex flex-col gap-[48px] h-[445px] items-start left-0 px-[32px] top-[1090px] w-full" data-name="Section">
       <Container4 />
       <Container12 />
     </div>
@@ -687,7 +687,7 @@ function Container27() {
 
 function Section2() {
   return (
-    <div className="absolute bg-white content-stretch flex flex-col gap-[48px] h-[542px] items-start left-0 pt-[80px] px-[32px] top-[1571px] w-[1101px]" data-name="Section">
+    <div className="absolute bg-white content-stretch flex flex-col gap-[48px] h-[542px] items-start left-0 pt-[80px] px-[32px] top-[1571px] w-full" data-name="Section">
       <Container25 />
       <Container27 />
     </div>
@@ -839,7 +839,7 @@ function Container36() {
 
 function Section3() {
   return (
-    <div className="absolute bg-[#f9fafb] h-[669px] left-0 top-[2143px] w-[1101px]" data-name="Section">
+    <div className="absolute bg-[#f9fafb] h-[669px] left-0 top-[2143px] w-full" data-name="Section">
       <Container34 />
       <Container36 />
     </div>
@@ -1079,7 +1079,7 @@ function Link() {
 
 function Section4() {
   return (
-    <div className="absolute bg-white h-[634px] left-0 top-[2839.86px] w-[1101px]" data-name="Section">
+    <div className="absolute bg-white h-[634px] left-0 top-[2839.86px] w-full" data-name="Section">
       <Container43 />
       <Container45 />
       <Link />
@@ -1220,7 +1220,7 @@ function Div2() {
 
 function Section5() {
   return (
-    <div className="absolute content-stretch flex flex-col h-[688px] items-start left-0 overflow-clip pt-[80px] px-[32px] top-0 w-[1101px]" data-name="section" style={{ backgroundImage: "linear-gradient(147.999deg, rgb(255, 255, 255) 0%, rgb(249, 250, 251) 100%)" }}>
+    <div className="absolute content-stretch flex flex-col h-[688px] items-start left-0 overflow-clip pt-[80px] px-[32px] top-0 w-full" data-name="section" style={{ backgroundImage: "linear-gradient(147.999deg, rgb(255, 255, 255) 0%, rgb(249, 250, 251) 100%)" }}>
       <Div2 />
     </div>
   );
@@ -1228,7 +1228,7 @@ function Section5() {
 
 function MainContent() {
   return (
-    <div className="h-[3473.859px] relative shrink-0 w-[1101px]" data-name="Main Content">
+    <div className="h-[3473.859px] relative shrink-0 w-full" data-name="Main Content">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid relative size-full">
         <Section />
         <Section1 />
@@ -1468,7 +1468,7 @@ function Container67() {
 
 function Footer() {
   return (
-    <div className="bg-[#003153] h-[321px] relative shrink-0 w-[1101px]" data-name="Footer">
+    <div className="bg-[#003153] h-[321px] relative shrink-0 w-full" data-name="Footer">
       <div className="bg-clip-padding border-0 border-[transparent] border-solid content-stretch flex flex-col gap-[32px] items-start pt-[48px] px-[32px] relative size-full">
         <Container58 />
         <Container67 />
@@ -1479,7 +1479,7 @@ function Footer() {
 
 function Div() {
   return (
-    <div className="absolute bg-white content-stretch flex flex-col h-[3795px] items-start left-0 pt-px top-0 w-[1101px]" data-name="div">
+    <div className="absolute bg-white content-stretch flex flex-col h-[3795px] items-start left-0 pt-px top-0 w-full" data-name="div">
       <MainContent />
       <Footer />
     </div>
